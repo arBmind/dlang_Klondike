@@ -21,17 +21,16 @@ public:
 
 	auto id() const { return m_symbol * RankCount + m_rank; }
 
-	static Card FromId(uint id) @safe {
+	static auto FromId(uint id) @safe {
 		assert(id < DeckCount);
-		Card c = { 
+		return Card( 
 			cast(Symbol)(id / RankCount),
 			cast(Rank)(id % RankCount)
-		};
-		return c;
+		);
 	}
 
 	@safe unittest {
-		Card c = { Symbol.Clubs, Rank.Ace };
+		auto c = Card( Symbol.Clubs, Rank.Ace );
 		assert(c.symbol == Symbol.Clubs);
 
 		assert(c.isBlack);
